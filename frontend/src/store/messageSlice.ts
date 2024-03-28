@@ -1,17 +1,19 @@
 import {Message} from "../types";
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchMessage, sendMessage} from "./messageThunk";
+import {fetchMessage, sendMessage, sendMessageById} from "./messageThunk";
 
 interface MessageState {
     messages: Message[];
     fetchLoading: boolean;
     createLoading:boolean;
+    sendLoading: boolean;
 }
 
 const initialState:MessageState = {
     messages: [],
     fetchLoading: false,
-    createLoading: false
+    createLoading: false,
+    sendLoading: false
 }
 
 export const messageSlice = createSlice({
@@ -34,6 +36,14 @@ export const messageSlice = createSlice({
             state.createLoading = false;
         }).addCase(sendMessage.rejected, (state) => {
             state.createLoading = false;
+        });
+
+        builder.addCase(sendMessageById.pending,(state) => {
+            state.sendLoading = true
+        }).addCase(sendMessageById.fulfilled,(state) => {
+            state.sendLoading = false
+        }).addCase(sendMessageById.rejected,(state) => {
+            state.sendLoading = false
         })
     }
 });

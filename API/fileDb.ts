@@ -1,5 +1,6 @@
 import {Message, MessageWithoutId} from "./types";
 import {promises as fs} from 'fs'
+import message from "./routers/message";
 
 const filename = 'db.json';
 
@@ -18,10 +19,21 @@ const fileDb = {
         return data;
     },
 
+    async getItemById(id: string) {
+        return data.find(message => message.id === id);
+    },
+    async addItemById(id: string, item:MessageWithoutId) {
+        const messageById =  data.find(message => message.id === id);
+        messageById?.array.push(item)
+        await this.save();
+        return messageById
+    },
+
     async addItem(item:MessageWithoutId) {
         const message = {
             id: crypto.randomUUID(),
-            ...item
+            ...item,
+            array: []
         }
         data.push(message);
         await this.save();

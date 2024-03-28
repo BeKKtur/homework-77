@@ -10,13 +10,19 @@ export const fetchMessage = createAsyncThunk<Message[]>(
     }
 );
 
-export const sendMessage = createAsyncThunk<void,MessageMutation>(
+export const sendMessage = createAsyncThunk<void, MessageMutation>(
     'message/sendMessage',
-    (messageMutation) => {
+    (messageMutation,) => {
         const serialized = {
             ...messageMutation,
         }
 
         return axiosApi.post('/message', serialized);
-    }
-)
+    });
+
+export const sendMessageById = createAsyncThunk<string, MessageMutation>(
+    'message/sendMessageById',
+    (messageMutation) => {
+        const {message_id, ...data} = messageMutation
+        return axiosApi.post(`/message/${message_id}`, data);
+    });

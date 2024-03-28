@@ -6,7 +6,7 @@ import {MessageMutation} from "../../types";
 interface Props {
     onSubmit: (mutation:MessageMutation) => void
 }
-const SendMessage:React.FC<Props> = ({onSubmit}) => {
+const SendMessageForm:React.FC<Props> = ({onSubmit}) => {
     const [state, setState] = useState<MessageMutation>({
         author: '',
         message: '',
@@ -46,23 +46,24 @@ const SendMessage:React.FC<Props> = ({onSubmit}) => {
                             value={state.message}
                             onChange={inputChangeHandler}
                             name="message"
+                            required
                         />
                     </Grid>
-                    {/*<Grid item xs>*/}
-                    {/*    <TextField*/}
-                    {/*        multiline rows={3}*/}
-                    {/*        id="description" label="Description"*/}
-                    {/*        value={state.image}*/}
-                    {/*        onChange={inputChangeHandler}*/}
-                    {/*        name="description"*/}
-                    {/*    />*/}
-                    {/*</Grid>*/}
                     <Grid item xs>
-                        <Button type="submit" color="primary" variant="contained">Create</Button>
+                        <TextField
+                            multiline rows={3}
+                            id="image" label="Image"
+                            value={state.image}
+                            onChange={inputChangeHandler}
+                            name="image"
+                        />
+                    </Grid>
+                    <Grid item xs>
+                        <Button type="submit" color="primary" variant="contained">Send</Button>
                     </Grid>
                 </Grid>
             </form>
         </Container>
     );
 };
-export default SendMessage;
+export default SendMessageForm;

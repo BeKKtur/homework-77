@@ -13,6 +13,7 @@ function App() {
             <Routes>
                 <Route path='/' element={<Messages/>}/>
                 <Route path='send' element={<NewMessage/>}/>
+                <Route path='/message/:id' element={<NewMessage/>}/>
             </Routes>
         </main>
 
