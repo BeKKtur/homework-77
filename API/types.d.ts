@@ -3,6 +3,13 @@ export interface Message {
     author: string;
     message: string;
     image: string;
+    array: Test[]
 }
 
-export type MessageWithoutId = Omit<Message, 'id'>
+export interface Test {
+    author: string;
+    message: string;
+    image: string;
+}
+
+export type MessageWithoutId = Omit<Message, 'id', 'array'>
