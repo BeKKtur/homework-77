@@ -1,4 +1,4 @@
-import {Message} from "./types";
+import {Message, MessageWithoutId} from "./types";
 import {promises as fs} from 'fs'
 
 const filename = 'db.json';
@@ -18,8 +18,9 @@ const fileDb = {
         return data;
     },
 
-    async addItem(item:Message) {
+    async addItem(item:MessageWithoutId) {
         const message = {
+            id: crypto.randomUUID(),
             ...item
         }
         data.push(message);
